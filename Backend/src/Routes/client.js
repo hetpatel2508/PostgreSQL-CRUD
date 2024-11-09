@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { createClient, deleteClient, fetchClient, searchClient, updateClient }  from "../Controllers/client.js";
+import { createClient, deleteClient, fetchClient, searchClient, searchClientByName, updateClient }  from "../Controllers/client.js";
 
 
 const router = Router();
@@ -19,5 +19,7 @@ router.route("/:id")
         .put(updateClient)
         .delete(deleteClient)
         .get(searchClient);
+
+router.get("/search/:name", searchClientByName);
 
 export default router;

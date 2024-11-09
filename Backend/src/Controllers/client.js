@@ -84,3 +84,25 @@ export const searchClient = async (req, res) => {
         res.status(500).json({ error: "Failed to search client" });
     }
 }
+
+
+export const searchClientByName = async (req, res) => {
+    try {
+        const { name } = req.params;
+        
+        const searchTerm = `%${name}%`;  // Add the wildcards for partial match
+        // Corrected SQL query
+        const { rows } = await query("SELECT * FROM clients_tb WHERE name ILIKE $1", [searchTerm]);
+
+        
+
+        if (rows.length === 0) {
+            return res.status(404).json({ message: "Client not found" });  // Handle case where no client is found
+        }
+
+        res.status(200).json(rows);  // Returning all matching clients (not just the first one)
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ error: "Failed to search client" });
+    }
+};

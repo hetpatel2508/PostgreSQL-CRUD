@@ -1,4 +1,4 @@
-export default function Navbar({ onOpen }) {
+export default function Navbar({ setShowModal, showModal , setSearch}) {
     return (
         <>
            <div className="navbar bg-base-100">
@@ -12,7 +12,7 @@ export default function Navbar({ onOpen }) {
             <div className="navbar-center">
                 <div className="form-control">
                     {/* w-48 */}
-                    <input type="text" placeholder="Search" className=" input input-bordered w-48 md:w-auto" />
+                    <input type="text" placeholder="Search" onChange={(e)=>{setSearch(e.target.value)}} className=" input input-bordered w-48 md:w-auto" />
                 </div>
                 
             </div>
@@ -20,7 +20,7 @@ export default function Navbar({ onOpen }) {
                 {/* -- svg burrnos divs */}
                 {/* ++ add modal on clcik button  */}
 
-                <button onClick={onOpen} className="btn btn-primary">Add Client</button>
+                <button onClick={()=>{setShowModal(true)}} className="btn btn-primary">Add Client</button>
 
             </div>
             </div>
